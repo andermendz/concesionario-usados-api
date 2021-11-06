@@ -3,14 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "",
-  "author": "Anderson Mendoza <andersonmendz19@gmail.com>",
+  "author": "Anderson Mendoza <dsaldarriaga@prevalentware.com>",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
-  },
-  "engines": {
-    "node": "16.x"
+    "start": "nodemon server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
