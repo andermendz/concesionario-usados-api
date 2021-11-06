@@ -9,6 +9,9 @@
   "scripts": {
     "start": "node server.js"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
