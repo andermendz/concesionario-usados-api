@@ -1,4 +1,3 @@
-import jwtDecode from 'jwt-decode';
 import { ObjectId } from 'mongodb';
 import { getDB } from '../../db/db.js';
 import jwt_decode from 'jwt-decode';
@@ -20,27 +19,26 @@ const consultarUsuario = async (id, callback) => {
 };
 
 const consultarOCrearUsuario = async (req, callback) => {
-  //1.Obtener datos del usuario desde el token
+ 
  const token = req.headers.authorization.split('Bearer')[1];
-
  const user = jwt_decode(token)['http://localhost/userdata'];
  console.log(user);
 
  const baseDeDatos = getDB();
- await baseDeDatos.collection('usuario').findOne({email: user.email}, async (err, response) => {
-   console.log('response consulta bd', response);
-   if(response){
-
+ await baseDeDatos.collection('usuario').findOne({ email: user.email }, async (err, response) => {
+  console.log('response consulta bd', response);
+  if (response) {
+    // 7.1. si el usuario ya esta en la BD, devuelve la info del usuario
     callback(err, response);
-
-   } else {
-
+  } else {
+    // 7.2. si el usuario no esta en la bd, lo crea y devuelve la info
     user.auth0ID = user._id;
     delete user._id;
-    user.rol = 'inactivo';
-    await crearUsuario(user, (err, respuesta) =>callback(err,user));
-   }
- });
+    user.rol = 'sin rol';
+    user.estado = 'pendiente';
+    await crearUsuario(user, (err, respuesta) => callback(err, user));
+  }
+});
   
 }
 
