@@ -7,7 +7,7 @@ const autorizacionEstadoUsuario = async (req, res, next) => {
     const token = req.headers.authorization.split('Bearer')[1];
     const user = jwt_decode(token)['http://localhost/userdata'];
     console.log(user);
-   
+      _
     const baseDeDatos = getDB();
     await baseDeDatos.collection('usuario').findOne({ email: user.email }, async (err, response) => {
      console.log('response consulta bd', response);
